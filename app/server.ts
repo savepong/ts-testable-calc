@@ -1,19 +1,20 @@
 import * as Express from 'express'
 import Config from './config'
-import * as BodyParser from 'body-parser'
-import * as Fs from 'fs'
-import * as Multer from 'multer'
-
-const upload = Multer()
 
 const app = Express()
-app.use(BodyParser.json())
+
+app.use(Express.json())
 const port = Config.port
 
-app.get('/', (req, res) => res.send('Hello world'))
-app.post('/upload', upload.single('photo'), (req, res) => {
-  Fs.writeFileSync('/tmp/this_is_the_file.png', req.file.buffer)
-  res.send('Succeed')
+app.get('/', (req, res) => {
+  res.send('Hello world')
+})
+
+app.post('/', (req, res) => {
+  res.json({
+    success: true,
+    postedPayload: JSON.stringify(req.body, null, 2)
+  })
 })
 
 if (Config.NODE_ENV !== 'TEST') {
@@ -21,3 +22,33 @@ if (Config.NODE_ENV !== 'TEST') {
 }
 
 export default app
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+import * as Fs from 'fs'
+import * as Multer from 'multer'
+
+const upload = Multer()
+
+app.post('/upload', upload.single('photo'), (req, res) => {
+  Fs.writeFileSync('/tmp/this_is_the_file.png', req.file.buffer)
+  res.send('Succeed')
+})

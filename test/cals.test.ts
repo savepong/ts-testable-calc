@@ -7,7 +7,7 @@ describe('Calc', () => {
   })
 
   it('Can subtract', async () => {
-    const result = calc(100, 99, Operation.Substract)
+    const result = calc(100, 99, Operation.Subtract)
     expect(result).toEqual(1)
   })
 
@@ -19,5 +19,10 @@ describe('Calc', () => {
   it('Can divide', async () => {
     const result = calc(100, 2, Operation.Divide)
     expect(result).toEqual(50)
+  })
+
+  it('Can power', async () => {
+    const result = calc(5, 2, Operation.Power)
+    expect(result).toEqual(25)
   })
 })

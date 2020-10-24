@@ -27,6 +27,13 @@ app.post('/calc', (req, res) => {
       message: 'Invalid operation'
     })
   }
+
+  if (typeof firstNumber !== 'number' || typeof secondNumber !== 'number') {
+    return res.status(422).json({
+      error: true,
+      message: 'Invalid numbers'
+    })
+  }
   
   const result = calc(firstNumber, secondNumber, operation)
   return res.json({

@@ -53,4 +53,16 @@ describe('Calc', () => {
     expect(response.body.error).toBeTruthy()
     expect(response.body.message).toEqual('Invalid operation')
   })
+
+  it('Error for invalid numbers', async () => {
+    const response = await Supertest(Server).post('/calc').send({
+      firstNumber: '100',
+      secondNumber: 2,
+      operation: '*'
+    })
+    
+    expect(response.status).toEqual(422)
+    expect(response.body.error).toBeTruthy()
+    expect(response.body.message).toEqual('Invalid numbers')
+  })
 })
